@@ -7,11 +7,11 @@ import com.minis.core.XmlBeanDefinitionReader;
 import org.dom4j.DocumentException;
 
 public class ClassPathXmlApplicationContext implements BeanFactory{
-    BeanFactory beanFactory;
+    SimpleBeanFactory beanFactory;
     //context负责整合容器的启动过程，读外部配置，解析Bean定义，创建BeanFactory
     public ClassPathXmlApplicationContext(String fileName) throws DocumentException {
         Resource resource = new ClassPathXmlResource(fileName);
-        BeanFactory beanFactory = new SimpleBeanFactory();
+        SimpleBeanFactory beanFactory = new SimpleBeanFactory();
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(beanFactory);
         reader.loadBeanDefinitions(resource);
         this.beanFactory = beanFactory;
@@ -20,7 +20,12 @@ public class ClassPathXmlApplicationContext implements BeanFactory{
     public Object getBean(String beanName) throws BeansException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         return this.beanFactory.getBean(beanName);
     }
-    public void registerBeanDefinition(BeanDefinition beanDefinition) {
-        this.beanFactory.registerBeanDefinition(beanDefinition);
+    public void registerBean(String beanName,Object obj) {
+        this.beanFactory.registerBean(beanName,obj);
     }
+
+    public Boolean containsBean(String name) {
+        return this.beanFactory.containsBean(name);
+    }
+
 }

@@ -2,11 +2,12 @@ package com.minis.core;
 
 import com.minis.BeanDefinition;
 import com.minis.BeanFactory;
+import com.minis.context.SimpleBeanFactory;
 import org.dom4j.Element;
 
 public class XmlBeanDefinitionReader {
-    BeanFactory beanFactory;
-    public XmlBeanDefinitionReader(BeanFactory beanFactory) {
+    SimpleBeanFactory beanFactory;
+    public XmlBeanDefinitionReader(SimpleBeanFactory beanFactory) {
         this.beanFactory = beanFactory;
     }
     public void loadBeanDefinitions(Resource resource) {
